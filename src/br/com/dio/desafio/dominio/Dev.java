@@ -1,15 +1,19 @@
 package br.com.dio.desafio.dominio;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Dev {
     private String nome;
+    private LocalDate dataInscricao;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private List<String> feedbacks = new ArrayList<>();
 
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
+        this.dataInscricao = LocalDate.now();
     }
 
     public void progredir() {
@@ -37,6 +41,9 @@ public class Dev {
                 .sum();*/
     }
 
+    public void deixarFeedback(String feedback) {
+        this.feedbacks.add(feedback);
+    }
 
     public String getNome() {
         return nome;
@@ -60,6 +67,14 @@ public class Dev {
 
     public void setConteudosConcluidos(Set<Conteudo> conteudosConcluidos) {
         this.conteudosConcluidos = conteudosConcluidos;
+    }
+
+    public LocalDate getDataInscricao() {
+        return dataInscricao;
+    }
+
+    public List<String> getFeedbacks() {
+        return feedbacks;
     }
 
     @Override
